@@ -1,0 +1,4 @@
+{
+    "python.defaultInterpreterPath": "/home/srikanth/Desktop/cli-coding-agent/.venv/bin/python",
+    "python.analysis.autoImportCompletions": true
+}
