@@ -51,5 +51,11 @@ class TUI:
 
         self._console.print(Rule(Text("Assistant", style="assistant")))
 
+    def end_assistant(self):
+        self.begin_assiant()
+
     def stream_assiant_delta(self, content: str) -> None:
         self._console.print(content, end="", markup=False)
+
+    def error_message(self, error):
+        self._console.print(f"[error]{error}")

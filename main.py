@@ -1,4 +1,4 @@
-from rich.console import sys
+import sys
 from agent.agent import Agent
 from agent.events import AgentEventType
 from client.llm_client import LLMClinet
@@ -29,8 +29,12 @@ class CLI:
                     assistant_streaming = True
                 content = event.data.get("content", "")
                 self.tui.stream_assiant_delta(content)
-            if event.type == AgentEventType.TEXT_COMPLETE:
-                self.tui.begin_assiant()
+            elif event.type == AgentEventType.TEXT_COMPLETE:
+                self.tui.end_assistant()
+
+            elif event.type == AgentEventType.AGENT_ERROR:
+                # print("YO error cathed")
+                self.tui.error_message(f"{event.data.get("error","Unknown error")}")
 
 
 # async def run(messages):
