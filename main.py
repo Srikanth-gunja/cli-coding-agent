@@ -13,12 +13,12 @@ class CLI:
         self.agent: Agent | None = None
         self.tui = TUI()
 
-    async def run_single(self, message: list[dict[str, Any]]):
+    async def run_single(self, message: str):
         async with Agent() as agent:
             self.agent = agent
             return await self._process_message(message)
 
-    async def _process_message(self, message: list[dict[str, Any]]):
+    async def _process_message(self, message: str):
         if not self.agent:
             return None
         assistant_streaming = False
@@ -47,10 +47,9 @@ class CLI:
 @click.argument("prompt", required=False)
 def main(prompt: str | None):
     print(prompt)
-    messages = [{"role": "user", "content": prompt}]
     cli = CLI()
 
-    result = asyncio.run(main=cli.run_single(messages))
+    result = asyncio.run(main=cli.run_single(prompt or ""))
     if result is None:
         sys.exit(1)
 
